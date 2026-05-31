@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-import { Search, Play, Trash2, Calendar, FileCode, Plus, Grid, List, Tag, Eye, ArrowUpDown } from 'lucide-react';
+import { Search, Play, Trash2, Calendar, FileCode, FileText, Plus, Grid, List, Tag, Eye, ArrowUpDown } from 'lucide-react';
 import './FileManager.css';
+
+// Helper: determine file type from name
+function getFileType(name) {
+  const ext = (name || '').split('.').pop().toLowerCase();
+  if (ext === 'html' || ext === 'htm') return 'html';
+  return 'jsx';
+}
 
 export default function FileManager({ files, onSelectFile, onRunFile, onDeleteFile, onAddNewClick }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -56,7 +63,7 @@ export default function FileManager({ files, onSelectFile, onRunFile, onDeleteFi
           <input
             type="text"
             className="search-input"
-            placeholder="Search JSX files by name or content..."
+            placeholder="Search files by name or content..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -124,10 +131,10 @@ export default function FileManager({ files, onSelectFile, onRunFile, onDeleteFi
       {filteredFiles.length === 0 ? (
         <div className="empty-files-container">
           <FileCode className="empty-files-icon" size={60} />
-          <h3>No JSX files found</h3>
+          <h3>No files found</h3>
           <p>
             {files.length === 0
-              ? "Get started by importing a JSX file from your device or writing one from scratch."
+              ? "Get started by importing a JSX or HTML file from your device."
               : "Try adjusting your search criteria or tag filters."}
           </p>
           <button className="btn-primary" onClick={onAddNewClick}>
@@ -144,15 +151,22 @@ export default function FileManager({ files, onSelectFile, onRunFile, onDeleteFi
               onClick={() => onRunFile(file)}
             >
               <div className="file-card-header">
-                <FileCode className="file-card-type-icon" size={24} />
+                {getFileType(file.name) === 'html'
+                  ? <FileText className="file-card-type-icon html-icon" size={24} />
+                  : <FileCode className="file-card-type-icon jsx-icon" size={24} />}
                 <div className="file-card-title-meta">
                   <h3 className="file-card-name" title={file.name}>
                     {file.name}
                   </h3>
-                  <span className="file-card-date">
-                    <Calendar size={12} />
-                    {formatDate(file.updatedAt)}
-                  </span>
+                  <div className="file-card-meta-row">
+                    <span className={`file-type-badge ${getFileType(file.name) === 'html' ? 'badge-html' : 'badge-jsx'}`}>
+                      {getFileType(file.name).toUpperCase()}
+                    </span>
+                    <span className="file-card-date">
+                      <Calendar size={12} />
+                      {formatDate(file.updatedAt)}
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -202,7 +216,7 @@ export default function FileManager({ files, onSelectFile, onRunFile, onDeleteFi
                       e.stopPropagation();
                       onRunFile(file);
                     }}
-                    title="Run interactive JSX"
+                    title="Open in full-screen view"
                   >
                     <Play size={14} fill="currentColor" />
                     <span>Run</span>

@@ -126,7 +126,7 @@ export default function AddFileModal({ isOpen, onClose, onSave }) {
         <div className="modal-header">
           <div className="modal-title-group">
             <Plus size={20} className="modal-title-icon" />
-            <h2>Add JSX File</h2>
+            <h2>Add File</h2>
           </div>
           <button className="modal-close-btn" onClick={onClose}>
             <X size={20} />
@@ -208,7 +208,7 @@ export default function AddFileModal({ isOpen, onClose, onSave }) {
                   ) : (
                     <div className="dropzone-prompt">
                       <Upload className="upload-icon" size={40} />
-                      <p className="primary-prompt">Drag & drop your JSX file here</p>
+                      <p className="primary-prompt">Drag &amp; drop your file here</p>
                       <p className="secondary-prompt">or click to browse your device</p>
                       <span className="file-limits">Supports .jsx, .js, or .html files</span>
                     </div>
@@ -220,12 +220,12 @@ export default function AddFileModal({ isOpen, onClose, onSave }) {
             {/* Tab 2: Paste JSX Code */}
             {activeTab === 'paste' && (
               <div className="paste-section">
-                <label className="input-label">JSX Code Content</label>
+                <label className="input-label">JSX or HTML Code</label>
                 <textarea
                   className="code-textarea"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  placeholder={`// Paste your React JSX component code here\nfunction MyComponent() {\n  return <div>Hello World</div>;\n}\nrender(<MyComponent />);`}
+                  placeholder={`// Paste JSX or HTML code here...\n\n// JSX example:\nfunction App() {\n  return <h1>Hello World</h1>;\n}\n\n// HTML example:\n<!DOCTYPE html>\n<html><body><h1>Hello</h1></body></html>`}
                   spellCheck="false"
                 />
               </div>
