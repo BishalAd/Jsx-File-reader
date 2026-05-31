@@ -43,6 +43,11 @@ export function transpileJsx(sourceCode) {
       }
     }
 
+    // Strip export statements as they cause syntax errors when evaluated in inline scripts
+    processedCode = processedCode.replace(/export\s+default\s+/g, '');
+    processedCode = processedCode.replace(/export\s+(const|let|var|function|class)\s+/g, '$1 ');
+    processedCode = processedCode.replace(/export\s+\{[^}]+\};?/g, '');
+
     // Replace ESM imports (e.g. import React, { useState } from 'react')
     // Since React, ReactDOM are provided globally in the sandbox, we can remove/comment out these imports
     // or Babel can ignore them, but to make standard JSX files work, we can comment them out or strip them.
@@ -61,6 +66,10 @@ export function transpileJsx(sourceCode) {
     // Strip other react-dom imports
     processedCode = processedCode.replace(/import\s+.*?\s*from\s*['"]react-dom['"]/g, '');
     processedCode = processedCode.replace(/import\s+.*?\s*from\s*['"]react-dom\/client['"]/g, '');
+
+    // Strip all remaining import statements (e.g. lucide-react, shadcn components)
+    // to prevent the browser from throwing module resolution errors.
+    processedCode = processedCode.replace(/import\s+.*?from\s+['"][^'"]+['"];?/g, '/* stripped import */');
 
     // Babel transforms the code
     const result = Babel.transform(processedCode, {
