@@ -141,7 +141,7 @@ export default function FileManager({ files, onSelectFile, onRunFile, onDeleteFi
             <div
               key={file.id}
               className="file-card"
-              onClick={() => onSelectFile(file)}
+              onClick={() => onRunFile(file)}
             >
               <div className="file-card-header">
                 <FileCode className="file-card-type-icon" size={24} />
