@@ -32,8 +32,8 @@ export default function AddFileModal({ isOpen, onClose, onSave }) {
 
     // Validate extension
     const extension = file.name.split('.').pop().toLowerCase();
-    if (extension !== 'jsx' && extension !== 'js') {
-      setError('Please select a valid JSX or JS file (.jsx, .js)');
+    if (extension !== 'jsx' && extension !== 'js' && extension !== 'html' && extension !== 'htm') {
+      setError('Please select a valid JSX, JS, or HTML file (.jsx, .js, .html)');
       return;
     }
 
@@ -91,9 +91,10 @@ export default function AddFileModal({ isOpen, onClose, onSave }) {
       return;
     }
 
-    // Ensure name ends with .jsx
+    // Ensure name ends with a valid extension
     let finalName = name.trim();
-    if (!finalName.endsWith('.jsx') && !finalName.endsWith('.js')) {
+    if (!finalName.endsWith('.jsx') && !finalName.endsWith('.js') && !finalName.endsWith('.html') && !finalName.endsWith('.htm')) {
+      // Default to .jsx if no valid extension is provided
       finalName += '.jsx';
     }
 
@@ -183,7 +184,7 @@ export default function AddFileModal({ isOpen, onClose, onSave }) {
                   <input
                     ref={fileInputRef}
                     type="file"
-                    accept=".jsx,.js"
+                    accept=".jsx,.js,.html,.htm"
                     onChange={handleFileChange}
                     className="hidden-file-input"
                   />
@@ -209,7 +210,7 @@ export default function AddFileModal({ isOpen, onClose, onSave }) {
                       <Upload className="upload-icon" size={40} />
                       <p className="primary-prompt">Drag & drop your JSX file here</p>
                       <p className="secondary-prompt">or click to browse your device</p>
-                      <span className="file-limits">Supports .jsx or .js files</span>
+                      <span className="file-limits">Supports .jsx, .js, or .html files</span>
                     </div>
                   )}
                 </div>

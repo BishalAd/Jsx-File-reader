@@ -9,19 +9,27 @@ export default function JsxRunner({ file, onClose }) {
   const [runtimeError, setRuntimeError] = useState(null);
   const [key] = useState(0);
 
+  const isHtml = file?.name?.toLowerCase().endsWith('.html') || file?.name?.toLowerCase().endsWith('.htm');
+
   useEffect(() => {
     if (file) {
-      const { code, error } = transpileJsx(file.content);
-      if (error) {
-        setCompileError(error);
+      if (isHtml) {
         setTranspiledCode('');
-      } else {
         setCompileError(null);
-        setTranspiledCode(code);
+        setRuntimeError(null);
+      } else {
+        const { code, error } = transpileJsx(file.content);
+        if (error) {
+          setCompileError(error);
+          setTranspiledCode('');
+        } else {
+          setCompileError(null);
+          setTranspiledCode(code);
+        }
+        setRuntimeError(null);
       }
-      setRuntimeError(null);
     }
-  }, [file, key]);
+  }, [file, key, isHtml]);
 
   useEffect(() => {
     const handleMessage = (event) => {
@@ -112,9 +120,9 @@ export default function JsxRunner({ file, onClose }) {
       ) : (
         <iframe
           key={key}
-          srcDoc={getSandboxHtml()}
-          title="JSX Execution Sandbox"
-          sandbox="allow-scripts"
+          srcDoc={isHtml ? file.content : getSandboxHtml()}
+          title="Execution Sandbox"
+          sandbox="allow-scripts allow-same-origin"
           className="runner-iframe-fullscreen"
         />
       )}
