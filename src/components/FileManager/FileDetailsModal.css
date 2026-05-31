@@ -1,0 +1,267 @@
+.details-modal-container {
+  max-width: 650px !important;
+  height: 85vh;
+}
+
+.details-title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+.details-filename {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f8fafc;
+  margin: 0;
+}
+
+.details-edit-name-input {
+  background: #0b0f19;
+  border: 1px solid #38bdf8;
+  border-radius: 6px;
+  color: #f8fafc;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 4px 8px;
+  outline: none;
+  width: 90%;
+  max-width: 320px;
+}
+
+.details-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.details-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.details-icon-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.details-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.save-btn {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+  color: #34d399 !important;
+}
+
+.save-btn:hover {
+  background: rgba(16, 185, 129, 0.25) !important;
+}
+
+/* Tags Section */
+.details-modal-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.details-tags-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.details-section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.details-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.details-tag-badge {
+  font-size: 11px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.no-tags-placeholder {
+  font-size: 12px;
+  color: #475569;
+  font-style: italic;
+}
+
+.details-edit-tags-input {
+  background: #0b0f19;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #f8fafc;
+  font-size: 13px;
+  padding: 6px 10px;
+  outline: none;
+  width: 100%;
+}
+
+.details-edit-tags-input:focus {
+  border-color: #38bdf8;
+}
+
+/* Code Viewer Area */
+.code-viewer-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #0b0f19;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 250px;
+}
+
+.code-viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.code-viewer-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code-viewer-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.code-viewer-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.code-viewer-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f8fafc;
+}
+
+.copied-icon {
+  color: #34d399;
+}
+
+.code-viewer-body {
+  flex: 1;
+  overflow: auto;
+  padding: 12px 0;
+}
+
+.code-viewer-pre {
+  margin: 0;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+.code-line {
+  display: flex;
+  width: 100%;
+}
+
+.code-line:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.code-line-number {
+  width: 40px;
+  text-align: right;
+  padding-right: 12px;
+  color: #334155;
+  user-select: none;
+  font-size: 11px;
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.code-line-text {
+  padding-left: 12px;
+  white-space: pre;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+/* Footer layout */
+.details-modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.run-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #10b981 !important;
+  color: #fff !important;
+}
+
+.run-action-btn:hover {
+  background: #059669 !important;
+}
+
+@media (max-width: 640px) {
+  .details-modal-container {
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    border: none;
+  }
+}
